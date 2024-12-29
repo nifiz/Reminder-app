@@ -1,0 +1,9 @@
+#include "enums.h"
+
+const char *COMMAND_STRING_TABLE[] = {
+    FOREACH_COMMAND(GENERATE_STRING)
+};
+
+#undef FOREACH_COMMAND
+#undef GENERATE_ENUM
+#undef GENERATE_STRING

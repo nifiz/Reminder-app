@@ -3,6 +3,6 @@
 
 #include "structs.h"
 
-bool validateCommand(char* command);
+Command validateCommand(char* command);
 
 #endif

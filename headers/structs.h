@@ -13,9 +13,9 @@ typedef struct
 
 typedef struct
 {
-    tm startDate;
-    tm frequency;
-    
+    struct tm startDate;
+    struct tm frequency;
+
 } Timing;
 
 typedef struct

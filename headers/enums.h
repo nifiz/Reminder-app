@@ -1,5 +1,5 @@
 #ifndef ENUMS_H
-#define ENUMS_h
+#define ENUMS_H
 
 typedef enum 
 {
@@ -16,7 +16,7 @@ creation macro for later use. */
 
 #define FOREACH_COMMAND(COMMAND) \
         COMMAND(add)   \
-        COMMAND(remove)  \
+        COMMAND(delete)  \
         COMMAND(edit)   \
         COMMAND(list)  \
         COMMAND(error)  \
@@ -31,12 +31,6 @@ typedef enum {
     FOREACH_COMMAND(GENERATE_ENUM)
 } Command;
 
-extern const char *COMMAND_STRING_TABLE[] = {
-    FOREACH_COMMAND(GENERATE_STRING)
-};
-
-#undef FOREACH_COMMAND(COMMAND)
-#undef GENERATE_ENUM(ENUM)
-#undef GENERATE_STRING(STRING)
+extern const char *COMMAND_STRING_TABLE[];
 
 #endif
