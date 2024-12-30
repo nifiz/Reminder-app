@@ -1,10 +1,12 @@
 target = test
 compiler = gcc
 source_files = main.c parser.c enums.c
-headers = headers/
+source_files_dir = src/
+headers_dir = headers
+source_files_formatted = $(addprefix $(source_files_dir), $(source_files)) 
 
-$(target): src/main.c src/parser.c src/enums.c
-	$(compiler) src/main.c src/parser.c src/enums.c -o $(target) -Iheaders
+$(target): $(source_files_formatted)
+	$(compiler) $(source_files_formatted) -o $(target) -I$(headers_dir)
  
 clean: 
 	del $(target).exe
