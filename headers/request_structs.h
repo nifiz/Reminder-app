@@ -12,6 +12,7 @@ typedef struct {
 typedef struct {
     /* Flag tells us how to treat the data. */
     Flag flag;
+    /* Data received is valid and non empty. */
     void* data;
 } Parameter;
 

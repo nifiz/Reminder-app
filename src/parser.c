@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "enums.h"
 #include "parser.h"
+#include "request_structs.h"
 
 Command validateCommand(const char* command) 
 {
@@ -52,7 +53,7 @@ static Flag validateFlag(const char* flag)
     return badFlag;
 }
 
-static bool loadParameter(Flag f, const char* parameter)
+static bool loadParameter(Flag f, const char* parameter, Parameter* dest)
 {
     /* Check if given parameter is valid for provided flag. */
     bool success = false;
