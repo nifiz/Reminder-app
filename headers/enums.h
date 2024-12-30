@@ -48,11 +48,13 @@ typedef enum
 extern const char *FLAG_STRING_TABLE[];
 
 bool FlagMessageLoadParam(const char* param);
-bool FlagColorLoadParam(const char* param);
-bool FlagWhenLoadParam(const char* param);
-bool FlagFreqLoadParam(const char* param);
+bool FlagColorLoadParam  (const char* param);
+bool FlagWhenLoadParam   (const char* param);
+bool FlagFreqLoadParam   (const char* param);
+bool FlagIdLoadParam     (const char* param);
 
 /* Priority enum */
+/* I don't think that's needed at all. */
 
 #define FOREACH_PRIORITY(PRIORITY) \
         PRIORITY(unimportant)   \

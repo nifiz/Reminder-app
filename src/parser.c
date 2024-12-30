@@ -52,10 +52,31 @@ static Flag validateFlag(const char* flag)
     return badFlag;
 }
 
-static bool validateParameter(Flag f, const char* parameter)
+static bool loadParameter(Flag f, const char* parameter)
 {
     /* Check if given parameter is valid for provided flag. */
+    bool success = false;
+    switch (f)
+    {
+    case msg:
+        success = FlagMessageLoadParam(parameter);
+        break;
+    case color:
+        success = FlagColorLoadParam  (parameter);
+        break;
+    case when:
+        success = FlagWhenLoadParam   (parameter);
+    case freq:
+        success = FlagFreqLoadParam   (parameter);
+        break;
+    case id:
+        success = FlagIdLoadParam     (parameter);
+        break;
+    default:
+        break;
+    }
 
+    return success;
     
 }
 

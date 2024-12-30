@@ -1,6 +1,6 @@
 target = test
 compiler = gcc
-source_files = main.c parser.c enums.c
+source_files = main.c parser.c enums.c commands.c
 source_files_dir = src/
 headers_dir = headers
 source_files_formatted = $(addprefix $(source_files_dir), $(source_files)) 

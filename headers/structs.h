@@ -3,6 +3,7 @@
 
 #include <time.h>
 #include "enums.h"
+#include <stdint.h>
 
 typedef struct 
 {
@@ -25,7 +26,7 @@ typedef struct
 
 } Timing;
 
-Timing loadTiming(struct tm date, struct tm freq);
+Timing loadTiming(const char* date, const char* freq);
 
 typedef struct
 {

@@ -12,16 +12,13 @@ const char *PRIORITY_STRING_TABLE[] = {
     FOREACH_PRIORITY(GENERATE_STRING)
 };
 
-/* Todo */
+/* TODO */
 
-bool FlagMessageLoadParam(const char* param)
-{return true;}
-bool FlagColorLoadParam  (const char* param)
-{return true;}
-bool FlagWhenLoadParam   (const char* param)
-{return true;}
-bool FlagFreqLoadParam   (const char* param)
-{return true;}
+bool FlagMessageLoadParam(const char* param) {return true;}
+bool FlagColorLoadParam  (const char* param) {return true;}
+bool FlagWhenLoadParam   (const char* param) {return true;}
+bool FlagFreqLoadParam   (const char* param) {return true;}
+bool FlagIdLoadParam     (const char* param) {return true;}
 
 #undef FOREACH_COMMAND
 #undef FOREACH_FLAG

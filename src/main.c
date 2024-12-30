@@ -4,7 +4,5 @@
 
 int main(int argc, char** argv) {
 
-    Command givenCommand = validateCommand(argv[1]);
-
     return 0;
 }

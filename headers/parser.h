@@ -3,6 +3,7 @@
 
 #include "structs.h"
 
-Command validateCommand(char* command);
+Command validateCommand(const char* command);
+static Flag validateFlag(const char* flag);
 
 #endif
