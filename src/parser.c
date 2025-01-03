@@ -5,6 +5,7 @@
 #include "enums.h"
 #include "parser.h"
 #include "request_structs.h"
+#include "parameter_loaders.h"
 
 Command validateCommand(const char* command) 
 {
@@ -60,18 +61,18 @@ static bool loadParameter(Flag f, const char* parameter, Parameter* dest)
     switch (f)
     {
     case msg:
-        success = FlagMessageLoadParam(parameter);
+        success = FlagMessageLoadParam(parameter, dest);
         break;
     case color:
-        success = FlagColorLoadParam  (parameter);
+        success = FlagColorLoadParam  (parameter, dest);
         break;
     case when:
-        success = FlagWhenLoadParam   (parameter);
+        success = FlagWhenLoadParam   (parameter, dest);
     case freq:
-        success = FlagFreqLoadParam   (parameter);
+        success = FlagFreqLoadParam   (parameter, dest);
         break;
     case id:
-        success = FlagIdLoadParam     (parameter);
+        success = FlagIdLoadParam     (parameter, dest);
         break;
     default:
         break;
