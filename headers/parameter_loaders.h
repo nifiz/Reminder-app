@@ -11,4 +11,6 @@ bool FlagWhenLoadParam   (const char* param, Parameter* dest);
 bool FlagFreqLoadParam   (const char* param, Parameter* dest);
 bool FlagIdLoadParam     (const char* param, Parameter* dest);
 
+
+
 #endif

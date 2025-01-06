@@ -2,8 +2,9 @@
 #define STRUCTS_H
 
 #include <time.h>
-#include "enums.h"
 #include <stdint.h>
+
+#include "enums.h"
 
 typedef struct 
 {

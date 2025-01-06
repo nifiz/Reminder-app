@@ -25,3 +25,4 @@ bool FlagWhenLoadParam   (const char* param, Parameter* dest)
 }
 bool FlagFreqLoadParam   (const char* param, Parameter* dest) {return true;}
 bool FlagIdLoadParam     (const char* param, Parameter* dest) {return true;}
+

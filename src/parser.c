@@ -16,7 +16,7 @@ Command validateCommand(const char* command)
     return error;
 }
 
-RawParameterCollection structifyParams(int argc, char** argv, RawParameter* RawParameterArray) 
+RawParameterCollection structifyParams(int argc, char** argv) 
 {
     /* Warning: allocates memory on heap. */
 
@@ -80,6 +80,14 @@ static bool loadParameter(Flag f, const char* parameter, Parameter* dest)
 
     return success;
     
+}
+
+Request createRequest(const RawParameterCollection* rpc) 
+{
+    for (uint8_t i = 0; i < rpc->size; i++) 
+    {
+        loadParameter()
+    }
 }
 
 

@@ -6,10 +6,10 @@ headers_dir = headers
 source_files_formatted = $(addprefix $(source_files_dir), $(source_files)) 
 
 $(target): $(source_files_formatted)
-	$(compiler) $(source_files_formatted) -o $(target) -I$(headers_dir) -lc
+	$(compiler) $(source_files_formatted) -o $(target) -I$(headers_dir)
  
 clean: 
-	del $(target).exe
+	del $(target)
 
 run:
 	./$(target)
