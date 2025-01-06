@@ -6,6 +6,7 @@
 #include "enums.h"
 #include "structs.h"
 
+/* Contains: Flag flag, void* data */
 typedef struct {
     /* Flag tells us how to treat the data. */
     Flag flag;
@@ -13,10 +14,13 @@ typedef struct {
     void* data;
 } Parameter;
 
+/* Contains: Command command, Parameter** paramList, uint8_t paramCount */
 typedef struct {
     Command command;
     Parameter** paramList;
     uint8_t paramCount;
 } Request;
+
+Request createRequest(const RawParameterCollection* source, Command command);
 
 #endif

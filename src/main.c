@@ -8,7 +8,5 @@ int main(int argc, char** argv) {
 
     RawParameterCollection rpc = structifyParams(argc, argv);
 
-    for (uint8_t i = 0; i < rpc.size; i++) {
-        loadPa
-    }
+    
 }

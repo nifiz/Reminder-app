@@ -5,15 +5,16 @@
 #include <stdint.h>
 
 #include "enums.h"
-
+/* Contains: Flag flag, char* param, uint64_t paramLen */
 typedef struct 
 {
     Flag flag;
     char* param;
-    unsigned long long paramLen;
+    uint64_t paramLen;
 
 } RawParameter;
 
+/* Contains: RawParameter* rawParameterArray, uint8_t size */
 typedef struct
 {
     RawParameter* rawParameterArray;

@@ -54,41 +54,5 @@ static Flag validateFlag(const char* flag)
     return badFlag;
 }
 
-static bool loadParameter(Flag f, const char* parameter, Parameter* dest)
-{
-    /* Check if given parameter is valid for provided flag. */
-    bool success = false;
-    switch (f)
-    {
-    case msg:
-        success = FlagMessageLoadParam(parameter, dest);
-        break;
-    case color:
-        success = FlagColorLoadParam  (parameter, dest);
-        break;
-    case when:
-        success = FlagWhenLoadParam   (parameter, dest);
-    case freq:
-        success = FlagFreqLoadParam   (parameter, dest);
-        break;
-    case id:
-        success = FlagIdLoadParam     (parameter, dest);
-        break;
-    default:
-        break;
-    }
-
-    return success;
-    
-}
-
-Request createRequest(const RawParameterCollection* rpc) 
-{
-    for (uint8_t i = 0; i < rpc->size; i++) 
-    {
-        loadParameter(rpc)
-    }
-}
-
 
 
