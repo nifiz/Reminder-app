@@ -20,6 +20,8 @@ typedef struct
     uint8_t size;
 } RawParameterCollection;
 
+RawParameter RPCGetElementAt(const RawParameterCollection* rpc, uint8_t position);
+
 typedef struct
 {
     struct tm startDate;

@@ -86,7 +86,7 @@ Request createRequest(const RawParameterCollection* rpc)
 {
     for (uint8_t i = 0; i < rpc->size; i++) 
     {
-        loadParameter()
+        loadParameter(rpc)
     }
 }
 
