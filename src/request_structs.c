@@ -15,8 +15,8 @@ Request createRequest(const RawParameterCollection* source, Command command)
         RawParameter rp = RPCGetElementAt(source, i);
         r.paramList[i] = malloc(sizeof(Parameter));
 
-        loadParameter(&rp, r.paramList[i], rp.paramLen);
+        loadParameter(&rp, r.paramList[i]);
     }
-    
+
     return r;
 }

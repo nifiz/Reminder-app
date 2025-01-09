@@ -96,6 +96,9 @@ void FlagIdLoadParam     (const char* param, Parameter* dest, uint64_t dataLengt
         dest->flag = error;
         return;
     }
-    dest->data = _atoi64(param);
+    void* foo = dest->data;
+
+    *(uint64_t*)(dest->data) = _atoi64(param);
+    
     return;
 }
