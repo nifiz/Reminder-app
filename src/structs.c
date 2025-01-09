@@ -7,7 +7,7 @@ RawParameter RPCGetElementAt(const RawParameterCollection* rpc, uint8_t position
     
     if (rpc == NULL && position >= rpc->size) return rp;
 
-    rp =  *(rpc->rawParameterArray + sizeof(RawParameter)*position);
+    rp = *rpc->rawParameterArray[position];
 
     return rp;
 }

@@ -54,26 +54,39 @@ void FlagWhenLoadParam   (const char* param, Parameter* dest, uint64_t dataLengt
 
     dest->data = malloc(sizeof(struct tm));
 
+    struct tm* s_tm = dest->data;
+
     if (dest->data == NULL)
     {
         dest->flag = error;
         return;
     }
-    dest->flag = when;
+    dest->flag = when;    
 
+    printf("raw param: %s\n", param);
     /* 19 characters, in the following order: "DD-MM-YYYY:HH:MM:SS" */
-    char * token = strtok(param, "\",:");
-    ((struct tm*)dest->data)->tm_mday = atoi(token);
-    token = strtok(NULL, " ,.-");
-    ((struct tm*)dest->data)->tm_mon = (atoi(token) - 1); // 0 indexed months.
-    token = strtok(NULL, " ,.-");
-    ((struct tm*)dest->data)->tm_year = (atoi(token) - 1900); // Years since 1900.
-    token = strtok(NULL, " ,.-");
-    ((struct tm*)dest->data)->tm_hour = atoi(token);
-    token = strtok(NULL, " ,.-");
-    ((struct tm*)dest->data)->tm_min = atoi(token);
-    token = strtok(NULL, " ,.-");
-    ((struct tm*)dest->data)->tm_sec = atoi(token);
+    char * token = strtok(param, "\".:-");
+    s_tm->tm_mday = atoi(token);
+
+    token = strtok(NULL, "\".:-");
+    s_tm->tm_mon = (atoi(token) - 1); // 0 indexed months.
+
+    token = strtok(NULL, "\".:-");
+    s_tm->tm_year = (atoi(token) - 1900); // Years since 1900.
+
+    token = strtok(NULL, "\".:-");
+    s_tm->tm_hour = atoi(token);
+
+    token = strtok(NULL, "\".:-");
+    s_tm->tm_min = atoi(token);
+    
+    token = strtok(NULL, "\".:-");
+
+    if (token == NULL) // seconds omitted
+    {
+        token = "0";
+    }
+    s_tm->tm_sec = atoi(token);
 
     return;
 }

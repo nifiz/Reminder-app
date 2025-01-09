@@ -7,6 +7,8 @@
 #include "../headers/request_structs.h"
 #include "../headers/parameter_loaders.h"
 
+#define DEBUG
+
 Command validateCommand(const char* command) 
 {
     for (int i = 0; i < COMMAND_AMOUNT; i++) 
@@ -27,17 +29,22 @@ RawParameterCollection structifyParams(int argc, char** argv)
 
     uint8_t structAmount =  (argc - 2)/2;
 
-    RawParameter* localParamArray = malloc(sizeof(RawParameter) * structAmount);
+    rpc.rawParameterArray = malloc(sizeof(RawParameter*)*structAmount);
 
-    /* Args 0 and 1 are name and command. */
-    for (int i = 2; i < argc; i+=2)
+    /* Initialize first pointers */
+    for (uint8_t i = 0; i < structAmount; i++) 
     {
-        localParamArray[(i/2) - 1].flag = validateFlag(argv[i]);
-        localParamArray[(i/2) - 1].param = argv[i+1];
-        localParamArray[(i/2) - 1].paramLen = strlen(argv[i+1]);
+        rpc.rawParameterArray[i] = malloc(sizeof(RawParameter));
+        rpc.rawParameterArray[i]->flag = validateFlag(argv[(i*2)+2]); /* we want to access 3rd element, 5th and so on*/
+        rpc.rawParameterArray[i]->param = argv[(i*2)+3]; /* 4th, 6th, ...*/
+        rpc.rawParameterArray[i]->paramLen = strlen(argv[(i*2)+3]);
+        #ifdef DEBUG
+        printf("flag: %d, str:%s\n",rpc.rawParameterArray[i]->flag, FLAG_STRING_TABLE[(int)rpc.rawParameterArray[i]->flag] );
+        printf("parameter: %s\n", rpc.rawParameterArray[i]->param);
+        printf("param length: %d\n", rpc.rawParameterArray[i]->paramLen);
+        #endif
     }
 
-    rpc.rawParameterArray = localParamArray;
     rpc.size = structAmount;
 
     return rpc;
@@ -45,11 +52,12 @@ RawParameterCollection structifyParams(int argc, char** argv)
 
 static Flag validateFlag(const char* flag) 
 {
-    /* Check if flag is a valid string*/
+    /* Check if flag is a valid string */
 
     for (int i = 0; i < FLAG_AMOUNT; i++) 
     {
-        if (strcmp(flag, FLAG_STRING_TABLE[i])) return (Flag)i;
+        /* add 1 to account for a -dash before a flag */
+        if (!strcmp((flag+1), FLAG_STRING_TABLE[i])) return (Flag)i;
     }
     return badFlag;
 }

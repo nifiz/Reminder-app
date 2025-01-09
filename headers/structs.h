@@ -14,10 +14,10 @@ typedef struct
 
 } RawParameter;
 
-/* Contains: RawParameter* rawParameterArray, uint8_t size */
+/* Contains: RawParameter** rawParameterArray, uint8_t size */
 typedef struct
 {
-    RawParameter* rawParameterArray;
+    RawParameter** rawParameterArray;
     uint8_t size;
 } RawParameterCollection;
 
