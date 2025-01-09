@@ -1,5 +1,6 @@
-#include "parameter_loaders.h"
+#include <stdlib.h>
 
+#include "parameter_loaders.h"
 /* TODO */
 
 void loadParameter(const RawParameter* source, Parameter* destination)
@@ -11,44 +12,90 @@ void loadParameter(const RawParameter* source, Parameter* destination)
     switch (source->flag)
     {
     case msg:
-        FlagMessageLoadParam(source->param, destination);
+        FlagMessageLoadParam(source->param, destination, source->paramLen);
         break;
     case color:
-        FlagColorLoadParam  (source->param, destination);
+        FlagColorLoadParam  (source->param, destination, source->paramLen);
         break;
     case when:
-        FlagWhenLoadParam   (source->param, destination);
+        FlagWhenLoadParam   (source->param, destination, source->paramLen);
     case freq:
-        FlagFreqLoadParam   (source->param, destination);
+        FlagFreqLoadParam   (source->param, destination, source->paramLen);
         break;
     case id:
-        FlagIdLoadParam     (source->param, destination);
+        FlagIdLoadParam     (source->param, destination, source->paramLen);
         break;
     default:
         break;
     }
 }
-
-bool FlagMessageLoadParam(const char* param, Parameter* dest) 
-{
-    // invalid strcpy - dest needs to be malloc'ed!
-    strcpy((char*)dest->data, param);
-    dest->flag = msg;
+// **Allocates* memory and sets a valid Parameter pointed to by destination
+// might return a NULL pointer in case memory allocation fails
+void FlagMessageLoadParam(const char* source, Parameter* destination, uint64_t dataLength) 
+{   
+    /* 'source' is already a null terminated string. */
+    destination->data = malloc(sizeof(char) * dataLength);
+    if (destination->data == NULL) return;
+    strcpy_s(destination->data, dataLength * sizeof(char), source);
     return true;
 }
-bool FlagColorLoadParam  (const char* param, Parameter* dest) 
+void FlagColorLoadParam  (const char* param, Parameter* destination, uint64_t dataLength) 
 {
     /* Not sure if color should be a hex or an enum - perhaps something else entirely? */
-    strcpy((char*)dest->data, param);
-    dest->flag = msg;
+    destination->data = malloc(sizeof(char) * dataLength);
+    if (destination->data == NULL) return;
+    strcpy((char*)destination->data, param);
+    destination->flag = color;
     return true;
 }
-bool FlagWhenLoadParam   (const char* param, Parameter* dest) 
+void FlagWhenLoadParam   (const char* param, Parameter* dest, uint64_t dataLength) 
 {
-    /* A bit more complex - we gotta load a tm struct*/
+    // TODO - error checking for provided numbers, currently years like 2147483647 are possible
 
-    return true;
+    dest->data = malloc(sizeof(struct tm));
+
+    if (dest->data == NULL)
+    {
+        dest->flag = error;
+        return;
+    }
+    dest->flag = when;
+
+    /* 19 characters, in the following order: "DD-MM-YYYY:HH:MM:SS" */
+    char * token = strtok(param, "\",:");
+    ((struct tm*)dest->data)->tm_mday = atoi(token);
+    token = strtok(NULL, " ,.-");
+    ((struct tm*)dest->data)->tm_mon = (atoi(token) - 1); // 0 indexed months.
+    token = strtok(NULL, " ,.-");
+    ((struct tm*)dest->data)->tm_year = (atoi(token) - 1900); // Years since 1900.
+    token = strtok(NULL, " ,.-");
+    ((struct tm*)dest->data)->tm_hour = atoi(token);
+    token = strtok(NULL, " ,.-");
+    ((struct tm*)dest->data)->tm_min = atoi(token);
+    token = strtok(NULL, " ,.-");
+    ((struct tm*)dest->data)->tm_sec = atoi(token);
+
+    return;
 }
-bool FlagFreqLoadParam   (const char* param, Parameter* dest) {return true;}
-bool FlagIdLoadParam     (const char* param, Parameter* dest) {return true;}
+void FlagFreqLoadParam   (const char* param, Parameter* dest, uint64_t dataLength) 
+{
+    FlagWhenLoadParam(param, dest, dataLength);
 
+    if (dest->data == NULL) dest->flag = error;
+
+    else dest->flag = freq;
+
+    return;
+}
+void FlagIdLoadParam     (const char* param, Parameter* dest, uint64_t dataLength) 
+{
+    dest->flag = id;
+    dest->data = malloc(sizeof(uint64_t));
+    if (!dest->data == NULL) // i like to be explicit that's all
+    {
+        dest->flag = error;
+        return;
+    }
+    dest->data = _atoi64(param);
+    return;
+}

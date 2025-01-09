@@ -5,13 +5,12 @@
 #include "enums.h"
 #include "request_structs.h"
 
-void loadParameter(const RawParameter* source, Parameter* destination);
-
-bool FlagMessageLoadParam(const char* param, Parameter* dest);
-bool FlagColorLoadParam  (const char* param, Parameter* dest);
-bool FlagWhenLoadParam   (const char* param, Parameter* dest);
-bool FlagFreqLoadParam   (const char* param, Parameter* dest);
-bool FlagIdLoadParam     (const char* param, Parameter* dest);
+void loadParameter(const RawParameter* source, Parameter* destination, uint64_t dataLength);
+void FlagMessageLoadParam(const char* param, Parameter* dest, uint64_t dataLength);
+void FlagColorLoadParam  (const char* param, Parameter* dest, uint64_t dataLength);
+void FlagWhenLoadParam   (const char* param, Parameter* dest, uint64_t dataLength);
+void FlagFreqLoadParam   (const char* param, Parameter* dest, uint64_t dataLength);
+void FlagIdLoadParam     (const char* param, Parameter* dest, uint64_t dataLength);
 
 
 

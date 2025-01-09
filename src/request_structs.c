@@ -13,11 +13,10 @@ Request createRequest(const RawParameterCollection* source, Command command)
     for (uint8_t i = 0; i < source->size; i++) 
     {
         RawParameter rp = RPCGetElementAt(source, i);
-
         r.paramList[i] = malloc(sizeof(Parameter));
 
-        loadParameter(&rp, r.paramList[i]);
+        loadParameter(&rp, r.paramList[i], rp.paramLen);
     }
-
-
+    
+    return r;
 }

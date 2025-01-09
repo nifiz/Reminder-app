@@ -8,5 +8,7 @@ int main(int argc, char** argv) {
 
     RawParameterCollection rpc = structifyParams(argc, argv);
 
-    
+    createRequest(&rpc);
+
+
 }
