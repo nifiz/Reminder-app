@@ -2,16 +2,16 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include "enums.h"
-#include "parser.h"
-#include "request_structs.h"
-#include "parameter_loaders.h"
+#include "../headers/enums.h" 
+#include "../headers/parser.h"
+#include "../headers/request_structs.h"
+#include "../headers/parameter_loaders.h"
 
 Command validateCommand(const char* command) 
 {
     for (int i = 0; i < COMMAND_AMOUNT; i++) 
     {
-        if (strcmp(command, COMMAND_STRING_TABLE[i])) return (Command)i;
+        if (!strcmp(command, COMMAND_STRING_TABLE[i])) return (Command)i;
     }
     return error;
 }

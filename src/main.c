@@ -18,6 +18,8 @@ int main(int argc, char** argv) {
 
     RawParameterCollection rpc = structifyParams(argc, argv);
 
-    createRequest(&rpc, c);
+    Request r  = createRequest(&rpc, c);
+
+    getchar();
 
 }

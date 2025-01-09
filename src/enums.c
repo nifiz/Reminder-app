@@ -1,7 +1,7 @@
 #include <time.h>
 #include <stdlib.h>
-#include "enums.h"
-#include "request_structs.h"
+#include "../headers/enums.h"
+#include "../headers/request_structs.h"
 
 
 const char *COMMAND_STRING_TABLE[] = {
